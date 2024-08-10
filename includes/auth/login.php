@@ -29,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
     $_SESSION['user_role'] = $user['roll'];
     
     // Redirect to a dashboard or home page
-    header("Location: ../../index.php");
+    header("Location: ../../pages/admin/dashboard.php");
     exit();
 } else {
     // Redirect back to login with an error message

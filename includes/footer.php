@@ -79,7 +79,7 @@
 
 
     <!-- Script Links  -->
-
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -221,42 +221,89 @@
                 observer.observe(element);
             });
         });
-        // Gradiant text Script end
+      
+
         document.addEventListener('DOMContentLoaded', (event) => {
-            const loginBtn = document.getElementById('loginBtn');
-            const loginPopup = document.getElementById('loginPopup');
-            const closeBtn = document.getElementsByClassName('close-popup')[0];
-            const showSignup = document.getElementById('showSignup');
-            const showLogin = document.getElementById('showLogin');
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginPopup = document.getElementById('loginPopup');
+    const closeBtn = document.getElementsByClassName('close-popup')[0];
+    const showSignup = document.getElementById('showSignup');
+    const showLogin = document.getElementById('showLogin');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const forgetPasswordForm = document.getElementById('forgetPasswordForm');
+    const showForgetPassword = document.getElementById('showForgetPassword');
 
-            loginBtn.onclick = function () {
-                loginPopup.style.display = 'flex';
-                loginForm.style.display = 'block';
-                signupForm.style.display = 'none';
-            }
+    loginBtn.onclick = function () {
+        loginPopup.style.display = 'flex';
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        forgetPasswordForm.style.display = 'none';
+    }
 
-            closeBtn.onclick = function () {
-                loginPopup.style.display = 'none';
-            }
+    closeBtn.onclick = function () {
+        loginPopup.style.display = 'none';
+    }
 
-            window.onclick = function (event) {
-                if (event.target == loginPopup) {
-                    loginPopup.style.display = 'none';
-                }
-            }
+    window.onclick = function (event) {
+        if (event.target == loginPopup) {
+            loginPopup.style.display = 'none';
+        }
+    }
 
-            showSignup.onclick = function () {
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'block';
-            }
+    showSignup.onclick = function () {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+    }
 
-            showLogin.onclick = function () {
-                loginForm.style.display = 'block';
-                signupForm.style.display = 'none';
-            }
+    showLogin.onclick = function () {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        forgetPasswordForm.style.display = 'none';
+    }
+
+    showForgetPassword.onclick = function () {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'none';
+        forgetPasswordForm.style.display = 'block';
+    }
+});
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const icon = mobileMenuToggle.querySelector('i');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            navLinks.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
         });
+    });
+});
+
+
 
     </script>
 </body>

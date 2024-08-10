@@ -21,6 +21,7 @@ session_start(); // Start the session
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/general.css" />
     <link rel="stylesheet" href="./assets/css/responsive.css" />
+ <script src="../script/script.js"></script>
     <script>
         // Function to show alerts based on URL parameters
         function showAlert(status, message) {
@@ -118,7 +119,8 @@ session_start(); // Start the session
             </li>
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Gallery</a></li>
-            <button class="main-button nav-booking-btn"><a href="/pages/booking.php">Booking</a></button>
+            <button class="main-button navbar-btn" style="margin-left: 5px;"> <a href="/pages/booking.php">Booking</a></button>
+        
             <?php
             if (isset($_SESSION['user_role'])) {
                 $user_role = $_SESSION['user_role'];
@@ -139,7 +141,7 @@ session_start(); // Start the session
             ?>
 
 
-            <div id="loginPopup" class="popup">
+            <!-- <div id="loginPopup" class="popup">
                 <div class="popup-content">
                     <span class="close-popup">&times;</span>
                     <div id="loginForm">
@@ -185,6 +187,54 @@ session_start(); // Start the session
                         </div>
                     </div>
                 </div>
+            </div> -->
+            <div id="loginPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close-popup">&times;</span>
+                    <div id="loginForm">
+                        <h2>Login</h2>
+                        <form action="includes/auth/login.php" method="post">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" name="email" required>
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                            <div class="remember-forgot">
+                                <a href="#" id="showForgetPassword">Forgot Password?</a>
+                            </div>
+                            <button type="submit">Login</button>
+                        </form>
+                        <div class="register-link">
+                            Don't have an account? <a href="#" id="showSignup">Register here</a>
+                        </div>
+                    </div>
+
+                    <div id="signupForm" style="display:none;">
+                        <h2>Sign Up</h2>
+                        <form action="includes/auth/signup.php" method="post">
+                            <label for="newUsername">Username:</label>
+                            <input type="text" id="newUsername" name="newUsername" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="newPassword">Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                            <button type="submit">Sign Up</button>
+                        </form>
+                        <div class="login-link">
+                            Already have an account? <a href="#" id="showLogin">Login here</a>
+                        </div>
+                    </div>
+
+                    <div id="forgetPasswordForm" style="display:none;">
+                        <h2>Reset Password</h2>
+                        <form action="reset_request_process.php" method="post">
+                            <label for="email">Email:</label>
+                            <input type="email" id="resetEmail" name="email" required>
+                            <button type="submit">Send Reset Link</button>
+                        </form>
+                        
+                    </div>
+                </div>
             </div>
+
         </ul>
     </nav>

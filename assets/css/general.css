@@ -13,7 +13,6 @@
 	--white-color: #ffffff;
 	--background-color: #f7f7f7;
 	--button-hover-color: #2a259a;
-    --bg-color: #ffffff;
 }
 
 
@@ -38,7 +37,6 @@ body {
 
 /* Links */
 a {
-	color: var(--primary-color);
 	text-decoration: none;
 }
 
@@ -47,7 +45,7 @@ a {
 	display: inline-block;
 	padding: 5px 20px;
 	font-size: 1em;
-	color: var(--white-color);
+	color: var(--white-color) !important;
 		border: 1px solid linear-gradient(to right, var(--primary-color), var(--danger-color));
 
 	/* background: var(--primary-color); */

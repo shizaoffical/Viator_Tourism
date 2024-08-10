@@ -1,8 +1,9 @@
-<?php include ('includes/db.php'); ?>
+<?php include('includes/db.php'); ?>
 <?php
 session_start(); // Start the session
 
-
+include('includes/auth/reset_request_process.php');
+include('includes/auth/reset_password_form.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +19,14 @@ session_start(); // Start the session
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
+
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/general.css" />
     <link rel="stylesheet" href="./assets/css/responsive.css" />
- <script src="../script/script.js"></script>
+    <script src="../script/script.js"></script>
     <script>
         // Function to show alerts based on URL parameters
         function showAlert(status, message) {
@@ -39,7 +44,7 @@ session_start(); // Start the session
         }
 
         // Execute on page load
-        window.onload = function () {
+        window.onload = function() {
             const status = getQueryParam('status');
             const message = getQueryParam('message');
             const newUser = getQueryParam('new_user');
@@ -53,6 +58,21 @@ session_start(); // Start the session
             }
         };
     </script>
+  <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if the URL has a token parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+          
+            if (token) {
+                // Show the form if token is present
+                document.getElementById('ResetPasswordForm').style.display = 'block';
+                // Set the token in the form
+                document.getElementById('token').value = token;
+            } 
+        });
+    </script>
+
 </head>
 
 <body>
@@ -120,21 +140,21 @@ session_start(); // Start the session
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Gallery</a></li>
             <button class="main-button navbar-btn" style="margin-left: 5px;"> <a href="/pages/booking.php">Booking</a></button>
-        
+
             <?php
             if (isset($_SESSION['user_role'])) {
                 $user_role = $_SESSION['user_role'];
                 // Display content based on role
                 if ($user_role == 'admin' || $user_role == 'user') {
-                    ?>
+            ?>
                     <a href="includes/auth/logout.php">Logout</a>
-                    <?php
+                <?php
                 }
             } else {
                 ?>
                 <button type="button" id="loginBtn" style="margin-left: 10px !important;"><i class="fas fa-user icon"></i>
                 </button>
-                <?php
+            <?php
             }
 
 
@@ -226,13 +246,24 @@ session_start(); // Start the session
 
                     <div id="forgetPasswordForm" style="display:none;">
                         <h2>Reset Password</h2>
-                        <form action="reset_request_process.php" method="post">
+                        <form action="" method="post">
                             <label for="email">Email:</label>
                             <input type="email" id="resetEmail" name="email" required>
                             <button type="submit">Send Reset Link</button>
                         </form>
-                        
+
                     </div>
+                    <div id="ResetPasswordForm" style="display:none;">
+                        <h2>Reset Password</h2>
+                        <form method="post" action="">
+                            <label for="password">New Password:</label>
+                            <input type="password" id="password" name="password" required>
+                            <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
+                            <button type="submit" name="resetpassword">Reset Password</button>
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
 

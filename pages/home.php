@@ -4,7 +4,7 @@
         <div class="hero-slides">
             <!-- Start Single Slide -->
             <div class="hero-slide fadeIn">
-                <video src="./assets/videos/video-3.mp4" autoplay muted loop></video>
+                <video src="./assets/videos/video-12.mp4" autoplay muted loop></video>
 
                 <div class="hero-content">
                     <h1 class="gradient-text">Advanture is a worth.</h1>
@@ -15,7 +15,7 @@
             <!-- End Single Slide -->
             <!-- Start Single Slide -->
             <div class="hero-slide fadeOut">
-                <video src="./assets/videos/video-5.mp4" autoplay muted loop></video>
+                <video src="./assets/videos/video-7.mp4" autoplay muted loop></video>
                 <div class="hero-content">
                     <h1 class="gradient-text">Advanture is a worth.</h1>
                     <p>Discover new place with Viator Tourism</p>
@@ -25,7 +25,7 @@
             <!-- End Single Slide -->
             <!-- Start Single Slide -->
             <div class="hero-slide fadeOut">
-                <video src="./assets/videos/video-2.mp4" autoplay muted loop></video>
+                <video src="./assets/videos/video-8.mp4" autoplay muted loop></video>
                 <div class="hero-content">
                     <h1 class="gradient-text">Advanture is a worth.</h1>
                     <p>Discover new place with Viator Tourism</p>
@@ -35,7 +35,7 @@
             <!-- End Single Slide -->
             <!-- Start Single Slide -->
             <div class="hero-slide fadeOut">
-                <video src="./assets/videos/video-4.mp4" autoplay muted loop></video>
+                <video src="./assets/videos/video-11.mp4" autoplay muted loop></video>
                 <div class="hero-content">
                     <h1 class="gradient-text">Advanture is a worth.</h1>
                     <p>Discover new place with Viator Tourism</p>
@@ -45,7 +45,7 @@
             <!-- End Single Slide -->
             <!-- Start Single Slide -->
             <div class="hero-slide fadeOut">
-                <video src="./assets/videos/video-1.mp4" autoplay muted loop></video>
+                <video src="./assets/videos/video-6.mp4" autoplay muted loop></video>
                 <div class="hero-content">
                     <h1 class="gradient-text">Advanture is a worth.</h1>
                     <p>Discover new place with Viator Tourism</p>

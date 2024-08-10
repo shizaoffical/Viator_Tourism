@@ -19,22 +19,36 @@ $hashedPassword = md5($password);
 $sql = "SELECT id, name, email, roll FROM users WHERE email = '$email' AND password = '$hashedPassword'";
 $result = mysqli_query($conn, $sql);
 
-// Check if a user was found
-if (mysqli_num_rows($result) > 0) {
+ // Check if a user was found
+ if (mysqli_num_rows($result) > 0) {
     // Fetch user data
     $user = mysqli_fetch_assoc($result);
-    
-    // Store user ID and role in session
+
+    // Store user data in session
     $_SESSION['user_id'] = $user['id'];
+    $_SESSION['user_name'] = $user['name']; // Assuming the column name is 'username'
+    $_SESSION['user_email'] = $user['email'];
     $_SESSION['user_role'] = $user['roll'];
-    
-    // Redirect to a dashboard or home page
-    header("Location: ../../pages/admin/dashboard.php");
-    exit();
+
+    // Output success message and redirect after a delay
+    echo '<script>
+        Toastify({
+            text: "Login successful! Redirecting to dashboard...",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            duration: 3000
+        }).showToast();
+        setTimeout(function() { window.location.href = "../../pages/admin/dashboard.php"; }, 3000);
+    </script>';
 } else {
-    // Redirect back to login with an error message
-    header("Location: ../../index.php");
-    exit();
+    // Output error message and redirect after a delay
+    echo '<script>
+        Toastify({
+            text: "Invalid email or password. Please try again.",
+            backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
+            duration: 3000
+        }).showToast();
+        setTimeout(function() { window.location.href = "../../index.php"; }, 3000);
+    </script>';
 }
 
 // Close the connection

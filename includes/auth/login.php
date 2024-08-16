@@ -1,5 +1,8 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
 <?php
- include ('../../includes/db.php');
+include('../../includes/db.php');
 session_start(); // Start the session
 
 // Retrieve form data
@@ -19,26 +22,45 @@ $hashedPassword = md5($password);
 $sql = "SELECT id, name, email, roll FROM users WHERE email = '$email' AND password = '$hashedPassword'";
 $result = mysqli_query($conn, $sql);
 
- // Check if a user was found
- if (mysqli_num_rows($result) > 0) {
+// Check if a user was found
+if (mysqli_num_rows($result) > 0) {
     // Fetch user data
     $user = mysqli_fetch_assoc($result);
 
     // Store user data in session
     $_SESSION['user_id'] = $user['id'];
-    $_SESSION['user_name'] = $user['name']; // Assuming the column name is 'username'
+    $_SESSION['user_name'] = $user['name'];
     $_SESSION['user_email'] = $user['email'];
     $_SESSION['user_role'] = $user['roll'];
 
-    // Output success message and redirect after a delay
-    echo '<script>
-        Toastify({
-            text: "Login successful! Redirecting to dashboard...",
-            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-            duration: 3000
-        }).showToast();
-        setTimeout(function() { window.location.href = "../../pages/admin/dashboard.php"; }, 3000);
-    </script>';
+    if ($user['roll'] == 'admin') {
+        // Redirect to admin dashboard
+        echo '<script>
+            Toastify({
+                text: "Login successful! Redirecting to admin dashboard...",
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                duration: 3000
+            }).showToast();
+            setTimeout(function() {
+                window.location.href = "http://localhost/shiza/Viator_Tourism/pages/admin/dashboard.php";
+            }, 3000);
+        </script>';
+    } 
+    elseif ($user['roll'] == 'user') {
+        // Redirect to user dashboard
+        echo '<script>
+            Toastify({
+                text: "Login successful! Redirecting to user dashboard...",
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                duration: 3000
+            }).showToast();
+            setTimeout(function() {
+                window.location.href = "http://localhost/shiza/Viator_Tourism/pages/user/booking/index.php";
+            }, 3000);
+        </script>';
+    } 
+      
+    
 } else {
     // Output error message and redirect after a delay
     echo '<script>
@@ -47,7 +69,9 @@ $result = mysqli_query($conn, $sql);
             backgroundColor: "linear-gradient(to right, #FF5F6D, #FFC371)",
             duration: 3000
         }).showToast();
-        setTimeout(function() { window.location.href = "../../index.php"; }, 3000);
+        setTimeout(function() {
+            window.location.href = "../../index.php";
+        }, 3000);
     </script>';
 }
 

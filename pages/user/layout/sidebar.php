@@ -21,7 +21,7 @@ function getBaseUrl()
 $baseUrl = getBaseUrl();
 
 // Check if user role is not admin
-if ($userRole !== 'admin') {
+if ($userRole !== 'user') {
     header("Location: " . $baseUrl . "../../../includes/auth/logout.php");
     exit();
 }

@@ -42,7 +42,7 @@ if (mysqli_num_rows($result) > 0) {
                 duration: 3000
             }).showToast();
             setTimeout(function() {
-                window.location.href = "http://localhost/shiza/Viator_Tourism/pages/admin/dashboard.php";
+                window.location.href = "../../pages/admin/dashboard.php";
             }, 3000);
         </script>';
     } 
@@ -55,7 +55,7 @@ if (mysqli_num_rows($result) > 0) {
                 duration: 3000
             }).showToast();
             setTimeout(function() {
-                window.location.href = "http://localhost/shiza/Viator_Tourism/pages/user/booking/index.php";
+                window.location.href = "../../pages/user/booking/create.php";
             }, 3000);
         </script>';
     } 

@@ -30,7 +30,7 @@
       <div class="content-body">
       <div id="add-bus-form" class="form-container">
           <h2 class="form-title">Add Bus</h2>
-          <form action="../../../includes/bus/add.php" method="POST">
+          <form action="../../../includes/bus/add.php" method="POST"  enctype="multipart/form-data">
             <div class="form-row">
               <div class="form-group">
                 <label for="bus_number">Bus Number:</label>
@@ -134,8 +134,15 @@
                   </label>
                 </div>
               </div>
+             
             </div>
-
+            <div class="form-group">
+                <label>Status:</label>
+                <div class="form-group">
+                <label for="bus_image">Bus Image:</label>
+                <input type="file" id="bus_image" name="bus_image" required />
+              </div>
+              </div>
             <button type="submit" class="btn-primary">Add Bus</button>
           </form>
         </div>

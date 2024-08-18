@@ -57,48 +57,20 @@ if ($userRole !== 'user') {
     <img src="./assets/images/logo.png" alt="Logo" />
     <p>Vital Traveller</p>
   </div>
-  <ul>
-    <li>
-      <a href="http://<?= $host; ?>/shiza/Viator_Tourism/pages/admin/bus/index.php" onclick="toggleSection('buses-submenu')">
-        Buses <i class="fas fa-chevron-down"></i>
-      </a>
+ 
       <ul id="buses-submenu" class="submenu">
         <li>
-          <a href="bus/bus.php">Add Bus</a>
+          <a href="../../user/booking/create.php">New Booking</a>
         </li>
         <li>
+          <a href="../../user/booking/index.php">My Booking</a>
+        </li>
+        <li>
+          <a href="../../../includes/auth/logout.php">Logout</a>
+        </li>
+        <!-- <li>
           <a href="javascript:void(0)" onclick="toggleForm('manage-bus-form')">Manage Bus</a>
-        </li>
+        </li> -->
       </ul>
-    </li>
-    <li>
-      <a href="#packages" onclick="toggleSection('packages-submenu')">
-        Packages <i class="fas fa-chevron-down"></i>
-      </a>
-      <ul id="packages-submenu" class="submenu">
-        <li>
-          <a href="http://<?= $host; ?>/shiza/Viator_Tourism/pages/admin/booking/index.php">Booking</a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" onclick="toggleForm('add-package-form')">Add Package</a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" onclick="toggleForm('manage-package-form')">Manage Package</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="#tours" onclick="toggleSection('tours-submenu')">
-        Tours <i class="fas fa-chevron-down"></i>
-      </a>
-      <ul id="tours-submenu" class="submenu">
-        <li>
-          <a href="javascript:void(0)" onclick="toggleForm('add-tour-form')">Add Tour</a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" onclick="toggleForm('manage-tour-form')">Manage Tour</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
+
 </div>

@@ -1,7 +1,7 @@
 <?php
 include '../../../includes/db.php';
-session_start();
 
+/*
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_booking'])) {
     $bus_id = htmlspecialchars($_POST['bus_id']);
     $seats_requested = htmlspecialchars($_POST['seats']);
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_booking'])) {
         echo "<script>alert('Error retrieving bus details: " . mysqli_error($conn) . "');</script>";
     }
 }
-
+*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve and sanitize input values
     $from = htmlspecialchars($_POST['From']);
@@ -57,28 +57,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $company_id = htmlspecialchars($_POST['company_id']);
     $date = htmlspecialchars($_POST['date']);
     $seats = htmlspecialchars($_POST['seats']);
-      // Query to fetch the company name
-      $companyQuery = "SELECT name FROM bus_company WHERE id = ?";
-      $companyName = '';
-  
-      if ($stmt = mysqli_prepare($conn, $companyQuery)) {
-          // Bind the company_id parameter
-          mysqli_stmt_bind_param($stmt, 'i', $company_id);
-  
-          // Execute the query
-          mysqli_stmt_execute($stmt);
-  
-          // Bind the result to the companyName variable
-          mysqli_stmt_bind_result($stmt, $companyName);
-  
-          // Fetch the result
-          mysqli_stmt_fetch($stmt);
-  
-          // Close the statement
-          mysqli_stmt_close($stmt);
-      }  
+    // Query to fetch the company name
+    $companyQuery = "SELECT name FROM bus_company WHERE id = ?";
+    $companyName = '';
 
-    
+    if ($stmt = mysqli_prepare($conn, $companyQuery)) {
+        // Bind the company_id parameter
+        mysqli_stmt_bind_param($stmt, 'i', $company_id);
+
+        // Execute the query
+        mysqli_stmt_execute($stmt);
+
+        // Bind the result to the companyName variable
+        mysqli_stmt_bind_result($stmt, $companyName);
+
+        // Fetch the result
+        mysqli_stmt_fetch($stmt);
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    }
+
+
     // Example query to check bus availability
     $query = "SELECT * FROM buses WHERE departure_from = ? AND arrival_to = ? AND company_id = ? AND DATE(departure_time) = DATE(?)";
 
@@ -100,9 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Dashboard</title>
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
             <link rel="stylesheet" href="../../../assets/admin/style.css" />
 
         </head>
@@ -143,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <td>Seats</td>
                                         <td><?php echo htmlspecialchars($seats); ?></td>
                                     </tr>
-                                  
+
                                 </tbody>
                             </table>
                         </div>
@@ -166,59 +164,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php if (mysqli_num_rows($result) > 0): ?>
-    <?php 
-    $foundBuses = false; // Flag to check if any buses meet the condition
-    while ($row = mysqli_fetch_assoc($result)): 
-        // Compare remaining seats with the input seats
-        if ($row['remaining_seats'] >= $seats):
-            $foundBuses = true;
-    ?>
-        <tr>
-            <td><?php echo htmlspecialchars($row['bus_number']); ?></td>
-            <td><?php echo htmlspecialchars($row['departure_from']); ?></td>
-            <td><?php echo htmlspecialchars($row['arrival_to']); ?></td>
-            <td>
-                <?php
-                $departureTime = new DateTime($row['departure_time']);
-                echo $departureTime->format('d-m-Y h:i A');
-                ?>
-            </td>
-            <td>
-                <?php
-                $arrivalTime = new DateTime($row['arrival_time']);
-                echo $arrivalTime->format('d-m-Y h:i A');
-                ?>
-            </td>
-            <td><?php echo htmlspecialchars($row['remaining_seats']); ?></td>
-            <td><?php echo htmlspecialchars($row['price']); ?></td>
-            <td>
-            <form method="POST" action="">
-    <input type="hidden" name="bus_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-    <input type="hidden" name="seats" value="<?php echo htmlspecialchars($seats); ?>">
-    <button type="submit" name="apply_booking" value="1" class="btn btn-edit">Apply Booking</button>
-</form>
+                                    <?php if (mysqli_num_rows($result) > 0): ?>
+                                        <?php
+                                        $foundBuses = false; // Flag to check if any buses meet the condition
+                                        while ($row = mysqli_fetch_assoc($result)):
+                                            // Compare remaining seats with the input seats
+                                            if ($row['remaining_seats'] >= $seats):
+                                                $foundBuses = true;
+                                        ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($row['bus_number']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['departure_from']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['arrival_to']); ?></td>
+                                                    <td>
+                                                        <?php
+                                                        $departureTime = new DateTime($row['departure_time']);
+                                                        echo $departureTime->format('d-m-Y h:i A');
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $arrivalTime = new DateTime($row['arrival_time']);
+                                                        echo $arrivalTime->format('d-m-Y h:i A');
+                                                        ?>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($row['remaining_seats']); ?></td>
+                                                    <td>Rs.<?php echo htmlspecialchars($row['price']); ?></td>
+                                                    <td>
+                                                    <form id="payment-form" action="create-checkout-session.php" method="POST">
+                                                        <input type="hidden" name="bus_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                                        <input type="hidden" name="seats" value="<?php echo htmlspecialchars($seats); ?>">
+                                                       
+                                                        <button type="submit">Pay</button>
+                                                    </form>
 
 
-            </td>
-        </tr>
-    <?php 
-        endif; 
-    endwhile;
 
-    // If no buses met the condition, show a message
-    if (!$foundBuses):
-    ?>
-        <tr>
-            <td colspan="8">No buses found with the required number of seats available.</td>
-        </tr>
-    <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php
+                                            endif;
+                                        endwhile;
 
-<?php else: ?>
-    <tr>
-        <td colspan="8">No buses found for the selected criteria.</td>
-    </tr>
-<?php endif; ?>
+                                        // If no buses met the condition, show a message
+                                        if (!$foundBuses):
+                                            ?>
+                                            <tr>
+                                                <td colspan="8">No buses found with the required number of seats available.</td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="8">No buses found for the selected criteria.</td>
+                                        </tr>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -236,7 +236,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Error preparing query: " . mysqli_error($conn);
     }
-} else {
-    echo "<p>Invalid request method.</p>";
 }
 ?>

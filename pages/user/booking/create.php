@@ -32,14 +32,61 @@
           <h2 class="form-title">Add Booking</h2>
           <form action="check_bus.php" method="POST">
     <div class="form-row">
-        <div class="form-group">
-            <label for="bus_number">From:</label>
-            <input type="text" id="bus_number" name="From" required />
-        </div>
-        <div class="form-group">
-            <label for="driver-name">To:</label>
-            <input type="text" id="driver-name" name="to" required />
-        </div>
+    <div class="form-group">
+    <label for="departure_from">From:</label>
+    <select id="departure_from" name="From" required>
+        <option value="">Select City</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Faisalabad">Faisalabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+        <option value="Multan">Multan</option>
+        <option value="Peshawar">Peshawar</option>
+        <option value="Quetta">Quetta</option>
+        <option value="Sialkot">Sialkot</option>
+        <option value="Gujranwala">Gujranwala</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Sukkur">Sukkur</option>
+        <option value="Larkana">Larkana</option>
+        <option value="Bahawalpur">Bahawalpur</option>
+        <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+        <option value="Sargodha">Sargodha</option>
+        <option value="Sheikhupura">Sheikhupura</option>
+        <option value="Kasur">Kasur</option>
+        <option value="Jhelum">Jhelum</option>
+        <option value="Nawabshah">Nawabshah</option>
+        <option value="Mardan">Mardan</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="arrival_to">To:</label>
+    <select id="arrival_to" name="to" required>
+        <option value="">Select City</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Faisalabad">Faisalabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+        <option value="Multan">Multan</option>
+        <option value="Peshawar">Peshawar</option>
+        <option value="Quetta">Quetta</option>
+        <option value="Sialkot">Sialkot</option>
+        <option value="Gujranwala">Gujranwala</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Sukkur">Sukkur</option>
+        <option value="Larkana">Larkana</option>
+        <option value="Bahawalpur">Bahawalpur</option>
+        <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+        <option value="Sargodha">Sargodha</option>
+        <option value="Sheikhupura">Sheikhupura</option>
+        <option value="Kasur">Kasur</option>
+        <option value="Jhelum">Jhelum</option>
+        <option value="Nawabshah">Nawabshah</option>
+        <option value="Mardan">Mardan</option>
+    </select>
+</div>
+
         <div class="form-group">
             <label for="company">Company Name:</label>
             <select id="company" name="company_id" required>
